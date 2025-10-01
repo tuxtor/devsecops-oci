@@ -23,7 +23,13 @@ variable "user_id" {
   type        = string
 }
 
+variable "compartment_ocid" {
+  description = "Compartment ID where resources will be created for Tenancy"
+  type        = string
+}
+
 variable "region" {
   description = "OCI region where resources will be created for Tenancy"
   type        = string
 }
+

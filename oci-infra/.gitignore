@@ -3,4 +3,3 @@
 .terraform
 output.plan
 output
-.env
