@@ -45,6 +45,16 @@ jobs:
         run: |
           echo "${{ secrets.OCI_API_PRIVATE_KEY }}" > $HOME/oci_api_key.pem
           chmod 600 $HOME/oci_api_key.pem
+      - name: Create OCI config directory and file
+        run: |
+          mkdir -p ~/.oci
+          echo "[DEFAULT]" > ~/.oci/config
+          echo "user=${{ secrets.OCI_USER_ID }}" >> ~/.oci/config
+          echo "fingerprint=${{ secrets.OCI_API_FINGERPRINT }}" >> ~/.oci/config
+          echo "key_file=~/.oci/oci_api_key.pem" >> ~/.oci/config
+          echo "tenancy=${{ secrets.OCI_TENANCY }}" >> ~/.oci/config
+          echo "region=${{ secrets.OCI_REGION }}" >> ~/.oci/config
+          echo "pass_phrase=${{ secrets.OCI_API_KEY_PASSPHRASE }}" >> ~/.oci/config
       - name: Terraform Init
         run: terraform init
         working-directory: oci-infra
