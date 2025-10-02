@@ -33,3 +33,8 @@ variable "region" {
   type        = string
 }
 
+variable "infra_bootstrap" {
+  type        = bool
+  description = "Flag to indicate if the infrastructure bootstrap should be performed."
+  default     = false
+}

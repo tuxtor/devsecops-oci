@@ -26,6 +26,7 @@ module "network" {
   name                 = "tf-vorozco-vcn"
 }
 
+/*
 module "raw_instance" {
   source         = "./instance"
   compartment_id = var.compartment_ocid
@@ -35,5 +36,33 @@ module "raw_instance" {
   instance_name  = "tf-vorozco-instance"
   tags           = local.global_tags
   ssh_public_key = file("./id_ed25519.pub")
+}*/
+
+module "quarkus_cloud_native_workload" {
+  source                                  = "./containerinstance"
+  compartment_id                          = var.compartment_ocid
+  subnet_id                               = module.network.public_subnet_ids[0]
+  container_instance_name                 = "quarkus-cloud-native-workload"
+  container_instance_containers_image_url = "docker.io/tuxtor/quarkus-cloud-native-workload:latest"
+  tags                                    = local.global_tags
+}
+
+module "quarkus_registry" {
+  source          = "./registry"
+  compartment_id  = var.compartment_ocid
+  repository_name = "quarkus-cloud-native-workload"
+  tags            = local.global_tags
+}
+
+module "quarkus_container_dns_registry" {
+  source         = "./dns_registry"
+  compartment_id = var.compartment_ocid
+  dns_record = {
+    name   = "quarkus.oci.vorozco.com"
+    type   = "A"
+    ttl    = 300
+    record = module.quarkus_cloud_native_workload.container_instance_public_ip
+  }
+  infra_bootstrap = var.infra_bootstrap
 }
 
