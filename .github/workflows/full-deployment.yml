@@ -13,7 +13,6 @@ on:
         required: true
         default: 'false'
 
-
 permissions:
   contents: read
 
@@ -68,4 +67,8 @@ jobs:
         working-directory: oci-infra
       - name: Terraform Plan
         run: terraform plan -input=false
+        working-directory: oci-infra
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        run: terraform apply -auto-approve
         working-directory: oci-infra
