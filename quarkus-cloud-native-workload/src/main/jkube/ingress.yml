@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ${project.artifactId}
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+    - host: awsk8s.vorozco.com
+      http:
+        paths:
+          - path: /quarkus-cloud-native-workload(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: quarkus-cloud-native-workload
+                port:
+                  number: 8080
+  ingressClassName: nginx
