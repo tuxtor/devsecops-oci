@@ -94,6 +94,7 @@ jobs:
           exit-code: "0"
           severity: 'CRITICAL,HIGH'
           scanners: 'misconfig,secret'
+          cache: 'false'
       - name: Terraform Init
         run: terraform init
         working-directory: oci-infra
