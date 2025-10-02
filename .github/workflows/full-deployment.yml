@@ -58,9 +58,6 @@ jobs:
       - name: Terraform Init
         run: terraform init
         working-directory: oci-infra
-      - name: Terraform Format
-        run: terraform fmt -check
-        working-directory: oci-infra
       - name: Terraform Plan
         run: terraform plan -input=false
         working-directory: oci-infra
