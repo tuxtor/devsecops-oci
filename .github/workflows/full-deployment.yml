@@ -86,7 +86,7 @@ jobs:
           echo "region=${{ secrets.OCI_REGION }}" >> ~/.oci/config
           echo "pass_phrase=${{ secrets.OCI_API_KEY_PASSPHRASE }}" >> ~/.oci/config
       - name: Run Trivy security scan (IaC)
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@0.33.1
         with:
           scan-type: "fs"
           scan-ref: oci-infra
