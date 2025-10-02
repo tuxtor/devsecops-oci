@@ -1,12 +1,11 @@
-data "oci_core_subnet" "selected_subnet" {
-  subnet_id = var.subnet_id
+data "oci_identity_availability_domains" "ads" {
+  compartment_id = var.compartment_id
 }
 
 resource "oci_core_instance" "oci_host" {
   compartment_id      = var.compartment_id
-  availability_domain = data.oci_core_subnet.selected_subnet.availability_domain
+  availability_domain = var.availability_domain == null? data.oci_identity_availability_domains.ads.availability_domains[0].name: var.availability_domain
   shape               = var.shape
-
 
   display_name = var.instance_name
 
