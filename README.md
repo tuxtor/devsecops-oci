@@ -1,8 +1,6 @@
 # DevSecOps OCI
 
-[![Opentofu & Quarkus](https://github.com/tuxtor/devsecops-walkthrough/actions/workflows/full-deployment.yml/badge.svg)](https://github.com/tuxtor/devsecops-walkthrough/actions/workflows/full-deployment.yml)
-
-![overview.png](overview.png)
+[![Opentofu & Quarkus](https://github.com/tuxtor/devsecops-oci/actions/workflows/full-deployment.yml/badge.svg)](https://github.com/tuxtor/devsecops-oci/actions/workflows/full-deployment.yml)
 
 This repository is a comprehensive showcase of modern DevSecOps, cloud-native architecture, and CI/CD. Designed to demonstrate expertise in building cloud solutions on OCI. It features a fully automated infrastructure-as-code approach using Terraform, with modular definitions for networking, compute, container instances, registry (Docker Hub), DNS (OCI DNS).
 
