@@ -17,7 +17,37 @@ permissions:
   contents: read
 
 jobs:
+  quarkus:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+      - name: Run Maven tests
+        run: ./mvnw verify spotbugs:check
+        working-directory: quarkus-cloud-native-workload
+      - name: Docker build
+        run: ./mvnw k8s:build
+        working-directory: quarkus-cloud-native-workload
+      - name: Run Trivy security scan (Docker)
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: "image"
+          image-ref: quarkus-cloud-native-workload:latest
+          format: "table"
+          exit-code: "0"
+          severity: 'CRITICAL,HIGH'
+      - name: Docker push
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        run: ./mvnw -Djkube.docker.username=tuxtor -Djkube.docker.password=${{ secrets.DOCKER_PAT }} k8s:push
+        working-directory: quarkus-cloud-native-workload
   terraform:
+    needs: quarkus
     name: 'Terraform'
     runs-on: ubuntu-latest
     env:

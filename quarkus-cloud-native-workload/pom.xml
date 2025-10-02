@@ -15,7 +15,8 @@
         <quarkus.platform.version>3.25.3</quarkus.platform.version>
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.5.3</surefire-plugin.version>
-        <jkube.generator.name>quarkus-cloud-native-workload:%l</jkube.generator.name>
+        <jkube.generator.name>docker.io/tuxtor/quarkus-cloud-native-workload:%l</jkube.generator.name>
+
     </properties>
 
     <dependencyManagement>
