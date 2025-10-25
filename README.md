@@ -10,6 +10,9 @@ CI/CD pipelines are implemented with GitHub Actions, ensuring automated testing,
 
 Infrastructure changes are gated to the main branch, while all branches benefit from planning and testing workflows. Pull requests are reviewed with Copilot to enhance code quality and security.
 
+## Architecture
+
+![Architecture Diagram](./docs/architecture-diagram.png)
 
 ## Principles and practices
 - [12 Factor App: Cloud Native Principles](https://12factor.net/)
