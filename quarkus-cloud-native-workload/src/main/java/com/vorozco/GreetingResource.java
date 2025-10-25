@@ -14,7 +14,7 @@ public class GreetingResource {
         return "Hello from Quarkus REST";
     }
 
-    private String doSpotBugsDemo(){
+    private String doSpotBugsDemo() {
         return "SpotBugs demo";
     }
 }
