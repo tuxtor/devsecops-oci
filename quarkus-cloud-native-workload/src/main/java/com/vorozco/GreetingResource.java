@@ -11,12 +11,10 @@ public class GreetingResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
-        var test = doSpotBugsDemo();
         return "Hello from Quarkus REST";
     }
 
     private String doSpotBugsDemo() {
-        var test2 = "Esta es una pesima forma de programar";
         return "SpotBugs demo";
     }
 }
