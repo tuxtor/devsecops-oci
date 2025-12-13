@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "oci" {
-    namespace = "idemd9jasawg"
+    namespace = "idmcnnm1fqup"
     bucket    = "tf-state-bucket"
   }
 }

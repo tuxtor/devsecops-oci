@@ -43,7 +43,8 @@ module "quarkus_cloud_native_workload" {
   container_instance_name                 = "quarkus-cloud-native-workload"
   container_instance_containers_image_url = "docker.io/tuxtor/quarkus-cloud-native-workload:latest"
   tags                                    = local.global_tags
-  count                                   = var.infra_bootstrap ? 0 : 1
+  #count                                   = var.infra_bootstrap ? 0 : 1
+  count = 0
 }
 
 module "quarkus_registry" {
@@ -57,11 +58,12 @@ module "quarkus_container_dns_registry" {
   source         = "./dns_registry"
   compartment_id = var.compartment_ocid
   dns_record = {
-    name   = "quarkus.oci.vorozco.com"
+    name   = "quarkus.tf.vorozco.com"
     type   = "A"
     ttl    = 300
     record = module.quarkus_cloud_native_workload[0].container_instance_public_ip
   }
-  count = var.infra_bootstrap ? 0 : 1
+  #count = var.infra_bootstrap ? 0 : 1
+  count = 0
 }
 
