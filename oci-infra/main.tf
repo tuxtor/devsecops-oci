@@ -25,7 +25,7 @@ module "network" {
 }
 
 module "raw_instance" {
-  count          = 0
+  count          = var.infra_bootstrap ? 0 : 1
   source         = "./instance"
   compartment_id = var.compartment_ocid
   shape          = "VM.Standard.E5.Flex"
@@ -61,9 +61,9 @@ module "quarkus_container_dns_registry" {
     name   = "quarkus.tf.vorozco.com"
     type   = "A"
     ttl    = 300
-    record = module.quarkus_cloud_native_workload[0].container_instance_public_ip
+    record = module.raw_instance[0].instance_public_ip
   }
-  #count = var.infra_bootstrap ? 0 : 1
-  count = 0
+  count = var.infra_bootstrap ? 0 : 1
+  #count = 0
 }
 

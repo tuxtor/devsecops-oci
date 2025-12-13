@@ -16,6 +16,34 @@ resource "oci_core_instance" "oci_host" {
 
   metadata = {
     ssh_authorized_keys = var.ssh_public_key
+    user_data = base64encode(<<-EOF
+    #!/bin/bash
+    set -e
+
+    # on Oracle Linux
+    if command -v dnf >/dev/null 2>&1; then
+      sudo dnf -y install firewalld
+    else
+      sudo yum -y install firewalld
+    fi
+    sudo firewall-cmd --permanent --add-port=80/tcp
+    sudo firewall-cmd --reload
+
+    # Install Docker (container runtime) on Oracle Linux
+    if command -v dnf >/dev/null 2>&1; then
+      dnf -y install docker
+    else
+      yum -y install docker
+    fi
+    systemctl enable --now podman
+
+    # Pull a public image that listens on port 8080 and run it mapping host 80 -> container 8080
+    docker pull docker.io/tuxtor/quarkus-cloud-native-workload:latest
+    docker stop oci_app || true
+    docker rm oci_app || true
+    docker run -d --name oci_app -p 80:8080 docker.io/tuxtor/quarkus-cloud-native-workload:latest
+    EOF
+    )
   }
 
   create_vnic_details {
