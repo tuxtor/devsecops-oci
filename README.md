@@ -12,7 +12,7 @@ Infrastructure changes are gated to the main branch, while all branches benefit 
 
 ## Architecture
 
-![Architecture Diagram](./docs/architecture-diagram.png)
+![Architecture Diagram](overview.png)
 
 ## Principles and practices
 - [12 Factor App: Cloud Native Principles](https://12factor.net/)
