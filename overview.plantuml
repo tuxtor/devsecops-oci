@@ -15,14 +15,14 @@ rectangle "OCI" as cloud {
   rectangle "OCI DNS\noci.vorozco.com (zone)" as oci_dns
 
   rectangle "Region: us-ashburn-1\nCompartment: Terraform" as region {
-    rectangle "OCIR\nquarkus-cloudnative-workload" as ocir
+    rectangle "Docker Hub\nquarkus-cloudnative-workload" as ocir
 
     rectangle "VCN: vorozco-vcn" as vcn {
 
-      rectangle "Private Subnets (3 ADs)\n- Container Instances" as private_subnets {
-        rectangle "OCI Container Instances\n(Simple container service / serverless containers)" as containers {
+      rectangle "Public Subnets (3 ADs)\n- Container Instances" as private_subnets {
+        rectangle "OCI Compute\n(Raw instance / Simple container service / serverless containers)" as containers {
             ' Ingress/proxy and application containers modeled as container instances
-            rectangle "quarkus-group\nQuarkus app (replicas: 2)" as quarkus_group
+            rectangle "quarkus-group\nQuarkus app " as quarkus_group
         }
       }
     }
@@ -31,8 +31,8 @@ rectangle "OCI" as cloud {
 
 ' Relationships and traffic flows
 repo --> cloud : GitHub Actions (CI/CD)
-ocir -> containers : image pulls (OCIR -> Container Instances)
-oci_dns ...> containers : quarkus.oci.vorozco.com
+ocir -> containers : image pulls (Docker Hub -> Compute)
+oci_dns ...> containers : quarkus.tf.vorozco.com
 
 
 @enduml
