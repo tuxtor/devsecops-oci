@@ -41,3 +41,8 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "container_instance_containers_image_url" {
+  description = "OCI image URL for the container instance workload"
+  type        = string
+}

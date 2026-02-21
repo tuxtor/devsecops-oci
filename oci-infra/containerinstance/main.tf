@@ -10,6 +10,10 @@ resource "oci_container_instances_container_instance" "container_instance" {
     #Required
     image_url = var.container_instance_containers_image_url
 
+    environment_variables = {
+        APP_PLATFORM = "OCI Container Instance"
+    }
+
   }
   shape = var.shape
   shape_config {

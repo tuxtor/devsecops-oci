@@ -21,7 +21,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
  *
  * The message is returned as a JSON object.
  */
-@Path("/simple-greet")
+@Path("/hello")
 public class SimpleGreetResource {
 
     private static final String PERSONALIZED_GETS_COUNTER_NAME = "personalizedGets";
@@ -29,10 +29,12 @@ public class SimpleGreetResource {
     private static final String GETS_TIMER_NAME = "allGets";
     private static final String GETS_TIMER_DESCRIPTION = "Tracks all GET operations";
     private final String message;
+    private final String platform;
 
     @Inject
-    public SimpleGreetResource(@ConfigProperty(name = "app.greeting") String message) {
+    public SimpleGreetResource(@ConfigProperty(name = "app.greeting") String message, @ConfigProperty(name = "app.platform") String platform) {
         this.message = message;
+        this.platform = platform;
     }
 
     /**
@@ -43,7 +45,7 @@ public class SimpleGreetResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Message getDefaultMessage() {
-        String msg = String.format("%s %s!", message, "World");
+        String msg = String.format("%s %s running within %s!", message, "World", platform);
         Message message = new Message();
         message.setMessage(msg);
         return message;

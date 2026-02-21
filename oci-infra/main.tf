@@ -12,6 +12,7 @@ locals {
   global_tags = {
     Project = local.project_name
   }
+  workload_oci = "docker.io/tuxtor/helidon-cloud-native-workload:latest"
 }
 
 module "network" {
@@ -34,27 +35,28 @@ module "raw_instance" {
   instance_name  = "tf-vorozco-instance"
   tags           = local.global_tags
   ssh_public_key = file("./id_ed25519.pub")
+  container_instance_containers_image_url = local.workload_oci
 }
 
-module "quarkus_cloud_native_workload" {
+module "helidon_cloud_native_workload" {
   source                                  = "./containerinstance"
   compartment_id                          = var.compartment_ocid
   subnet_id                               = module.network.public_subnet_ids[0]
-  container_instance_name                 = "quarkus-cloud-native-workload"
-  container_instance_containers_image_url = "docker.io/tuxtor/quarkus-cloud-native-workload:latest"
+  container_instance_name                 = "helidon-cloud-native-workload"
+  container_instance_containers_image_url = local.workload_oci
   tags                                    = local.global_tags
-  #count                                   = var.infra_bootstrap ? 0 : 1
-  count = 0
+  count                                   = var.infra_bootstrap ? 0 : 1
+  #count = 0
 }
 
-module "quarkus_registry" {
+module "helidon_registry" {
   source          = "./registry"
   compartment_id  = var.compartment_ocid
-  repository_name = "quarkus-cloud-native-workload"
+  repository_name = "helidon-cloud-native-workload"
   tags            = local.global_tags
 }
 
-module "quarkus_container_dns_registry" {
+module "helidon_instance_dns_registry" {
   source         = "./dns_registry"
   compartment_id = var.compartment_ocid
   dns_record = {
@@ -62,6 +64,20 @@ module "quarkus_container_dns_registry" {
     type   = "A"
     ttl    = 300
     record = module.raw_instance[0].instance_public_ip
+  }
+  count = var.infra_bootstrap ? 0 : 1
+  #count = 0
+}
+
+
+module "helidon_container_instance_dns_registry" {
+  source         = "./dns_registry"
+  compartment_id = var.compartment_ocid
+  dns_record = {
+    name   = "helidon-ci.tf.vorozco.com"
+    type   = "A"
+    ttl    = 300
+    record = module.helidon_cloud_native_workload[0].container_instance_public_ip
   }
   count = var.infra_bootstrap ? 0 : 1
   #count = 0

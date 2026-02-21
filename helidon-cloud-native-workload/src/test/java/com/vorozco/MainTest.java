@@ -29,7 +29,7 @@ class MainTest {
 
     @Test
     void testMicroprofileMetrics() {
-        Message message = target.path("simple-greet/Joe")
+        Message message = target.path("hello/Joe")
                 .request()
                 .get(Message.class);
 
@@ -37,7 +37,7 @@ class MainTest {
         Counter counter = registry.counter("personalizedGets");
         double before = counter.getCount();
 
-        message = target.path("simple-greet/Eric")
+        message = target.path("hello/Eric")
                 .request()
                 .get(Message.class);
 
@@ -55,10 +55,10 @@ class MainTest {
     @Test
     void testGreet() {
         Message message = target
-                .path("simple-greet")
+                .path("hello")
                 .request()
                 .get(Message.class);
-        assertThat(message.getMessage(), is("Hello World!"));
+        assertThat(message.getMessage(), is("Hello World running within JVM!"));
     }
 
 }
