@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${project.artifactId}
+spec:
+  template:
+    spec:
+      containers:
+        - imagePullPolicy: Always
+          env:
+            - name: APP_PLATFORM
+              value: "k3s"
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 768Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
