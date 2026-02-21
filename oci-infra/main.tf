@@ -46,7 +46,6 @@ module "helidon_cloud_native_workload" {
   container_instance_containers_image_url = local.workload_oci
   tags                                    = local.global_tags
   count                                   = var.infra_bootstrap ? 0 : 1
-  #count = 0
 }
 
 module "helidon_registry" {

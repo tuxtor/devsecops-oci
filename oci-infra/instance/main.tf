@@ -41,7 +41,7 @@ resource "oci_core_instance" "oci_host" {
     docker pull ${var.container_instance_containers_image_url}
     docker stop oci_app || true
     docker rm oci_app || true
-    docker run -e APP_PLATFORM=container -d --name oci_app -p 80:8080 ${var.container_instance_containers_image_url}
+    docker run -e APP_PLATFORM="Oracle Linux" -d --name oci_app -p 80:8080 ${var.container_instance_containers_image_url}
     EOF
     )
   }
