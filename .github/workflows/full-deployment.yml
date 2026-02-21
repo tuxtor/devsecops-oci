@@ -61,10 +61,10 @@ jobs:
           java-version: '21'
           cache: 'maven'
       - name: Run Maven tests
-        run: mvn -B verify
+        run: ./mvnw -B verify
         working-directory: helidon-cloud-native-workload
       - name: Docker build
-        run: mvn -B k8s:build
+        run: ./mvnw -B k8s:build
         working-directory: helidon-cloud-native-workload
       - name: Run Trivy security scan (Docker)
         uses: aquasecurity/trivy-action@0.28.0
@@ -76,7 +76,7 @@ jobs:
           severity: 'CRITICAL,HIGH'
       - name: Docker push
         if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
-        run: mvn -B -Djkube.docker.username=tuxtor -Djkube.docker.password=${{ secrets.DOCKER_PAT }} k8s:push
+        run: ./mvnw -B -Djkube.docker.username=tuxtor -Djkube.docker.password=${{ secrets.DOCKER_PAT }} k8s:push
         working-directory: helidon-cloud-native-workload
 
   terraform:
