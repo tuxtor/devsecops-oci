@@ -1,10 +1,10 @@
 # DevSecOps OCI
 
-[![Opentofu & Quarkus](https://github.com/tuxtor/devsecops-oci/actions/workflows/full-deployment.yml/badge.svg)](https://github.com/tuxtor/devsecops-oci/actions/workflows/full-deployment.yml)
+[![Opentofu & Helidon](https://github.com/tuxtor/devsecops-oci/actions/workflows/full-deployment.yml/badge.svg)](https://github.com/tuxtor/devsecops-oci/actions/workflows/full-deployment.yml)
 
 This repository is a comprehensive showcase of modern DevSecOps, cloud-native architecture, and CI/CD. Designed to demonstrate expertise in building cloud solutions on OCI. It features a fully automated infrastructure-as-code approach using Terraform, with modular definitions for networking, compute, container instances, registry (Docker Hub), DNS (OCI DNS).
 
-The application layer leverages Java 21 and Quarkus, containerized with Docker for portability and rapid deployment.
+The application layer leverages Java 21 and Helidon, containerized with Docker for portability and rapid deployment.
 
 CI/CD pipelines are implemented with GitHub Actions, ensuring automated testing, static code analysis (SpotBugs for Java, Trivy for IaC and containers), and secure dependency management via Dependabot.
 
@@ -25,10 +25,10 @@ Infrastructure changes are gated to the main branch, while all branches benefit 
 ## Tools
 - Terraform
 - Java 21
-- Quarkus
+- Helidon
 - Eclipse JKube
 - OCI
-- Docker (used for containerization in Quarkus workloads)
+- Docker (used for containerization in Helidon workloads)
 - GitHub Actions
 - Static code analysis
     - (Code) [SpotBugs](https://spotbugs.github.io/)
