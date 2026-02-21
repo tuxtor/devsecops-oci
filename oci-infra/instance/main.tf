@@ -38,10 +38,10 @@ resource "oci_core_instance" "oci_host" {
     systemctl enable --now podman
 
     # Pull a public image that listens on port 8080 and run it mapping host 80 -> container 8080
-    docker pull docker.io/tuxtor/quarkus-cloud-native-workload:latest
+    docker pull docker.io/tuxtor/helidon-cloud-native-workload:latest
     docker stop oci_app || true
     docker rm oci_app || true
-    docker run -d --name oci_app -p 80:8080 docker.io/tuxtor/quarkus-cloud-native-workload:latest
+    docker run -d --name oci_app -p 80:8080 docker.io/tuxtor/helidon-cloud-native-workload:latest
     EOF
     )
   }

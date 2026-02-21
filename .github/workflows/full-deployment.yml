@@ -80,7 +80,7 @@ jobs:
         working-directory: helidon-cloud-native-workload
 
   terraform:
-    needs: quarkus
+    needs: helidon
     name: 'Terraform'
     runs-on: ubuntu-latest
     env:

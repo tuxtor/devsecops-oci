@@ -58,7 +58,7 @@ module "quarkus_container_dns_registry" {
   source         = "./dns_registry"
   compartment_id = var.compartment_ocid
   dns_record = {
-    name   = "quarkus.tf.vorozco.com"
+    name   = "helidon.tf.vorozco.com"
     type   = "A"
     ttl    = 300
     record = module.raw_instance[0].instance_public_ip
