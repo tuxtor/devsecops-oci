@@ -36,7 +36,7 @@ jobs:
         run: ./mvnw k8s:build
         working-directory: quarkus-cloud-native-workload
       - name: Run Trivy security scan (Docker)
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: "image"
           image-ref: docker.io/tuxtor/quarkus-cloud-native-workload:latest
@@ -67,7 +67,7 @@ jobs:
         run: ./mvnw -B k8s:build
         working-directory: helidon-cloud-native-workload
       - name: Run Trivy security scan (Docker)
-        uses: aquasecurity/trivy-action@0.36.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: "image"
           image-ref: docker.io/tuxtor/helidon-cloud-native-workload:latest
@@ -118,7 +118,7 @@ jobs:
           echo "region=${{ secrets.OCI_REGION }}" >> ~/.oci/config
           echo "pass_phrase=${{ secrets.OCI_API_KEY_PASSPHRASE }}" >> ~/.oci/config
       - name: Run Trivy security scan (IaC)
-        uses: aquasecurity/trivy-action@0.36.1
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: "fs"
           scan-ref: oci-infra
