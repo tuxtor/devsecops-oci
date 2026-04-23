@@ -61,7 +61,7 @@ jobs:
           java-version: '21'
           cache: 'maven'
       - name: Run Maven tests
-        run: ./mvnw -B verify
+        run: ./mvnw -B verify spotbugs:check
         working-directory: helidon-cloud-native-workload
       - name: Docker build
         run: ./mvnw -B k8s:build
