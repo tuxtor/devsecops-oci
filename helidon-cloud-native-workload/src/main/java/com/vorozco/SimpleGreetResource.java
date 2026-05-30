@@ -45,7 +45,6 @@ public class SimpleGreetResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Message getDefaultMessage() {
-        // var phrase = this.doSpotBugsDemo();
         String msg = String.format("%s %s running within %s!", message, "World", platform);
         Message message = new Message();
         message.setMessage(msg);
@@ -61,11 +60,6 @@ public class SimpleGreetResource {
     public Message getMessage(@PathParam("name") String name) {
         String message = String.format("Hello %s", name);
         return new Message(message);
-    }
-
-    private String doSpotBugsDemo() {
-        // var deadVar = "This is a dead variable";
-        return "SpotBugs demo";
     }
 
 }
