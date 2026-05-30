@@ -45,7 +45,7 @@ public class SimpleGreetResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Message getDefaultMessage() {
-        var phrase = this.doSpotBugsDemo();
+        this.doSpotBugsDemo();
         String msg = String.format("%s %s running within %s!", message, "World", platform);
         Message message = new Message();
         message.setMessage(msg);
