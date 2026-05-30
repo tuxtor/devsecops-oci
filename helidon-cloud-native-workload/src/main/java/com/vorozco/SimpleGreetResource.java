@@ -64,7 +64,6 @@ public class SimpleGreetResource {
     }
 
     private String doSpotBugsDemo() {
-        var deadVar = "This is a dead variable";
         return "SpotBugs demo";
     }
 
