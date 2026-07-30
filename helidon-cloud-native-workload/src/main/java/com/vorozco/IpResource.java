@@ -11,6 +11,7 @@ import java.net.UnknownHostException;
 @Path("/ip")
 @Produces(MediaType.TEXT_PLAIN)
 public class IpResource {
+
     @GET
     public String getIp() {
         try {
@@ -19,4 +20,5 @@ public class IpResource {
             return "Unknown";
         }
     }
+
 }
